@@ -1,0 +1,45 @@
+/* index.css */
+
+/* CSS Reset for margin and padding */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base font and smooth rendering */
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* CSS Variables for light theme */
+:root {
+  --bs-light: #ffffff;
+  --bs-body-color: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary-text-color: #6c757d;
+  --bs-background: var(--bs-light);
+}
+
+/* Dark theme overrides */
+body.bg-dark {
+  --bs-light: #121212;
+  --bs-body-color: #e0e0e0;
+  --bs-primary: #69c0ff;
+  --bs-secondary-text-color: #cccccc;
+  --bs-background: #121212;
+}
+
+/* Body styles use CSS variables */
+body {
+  background-color: var(--bs-background);
+  color: var(--bs-body-color);
+  line-height: 1.5;
+  min-height: 100vh;
+}
