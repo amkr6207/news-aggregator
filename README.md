@@ -20,8 +20,8 @@ It fetches news articles based on selected categories or keyword search using th
 
 ## Demo
 
-[Live Demo Link](https://your-deployment-link.com)  
-*(Replace with your actual deployed URL)*
+[Live Demo Link](https://brilliant-dieffenbachia-ac2c47.netlify.app/)  
+
 
 ---
 
