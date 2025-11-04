@@ -13,7 +13,7 @@ function App() {
   // States for filters, articles, pagination, loading, error, dark mode
   const [category, setCategory] = useState("general");
   const [keyword, setKeyword] = useState("");
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]); // Stores fetched articles list
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
