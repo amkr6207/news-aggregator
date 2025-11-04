@@ -1,12 +1,66 @@
-# React + Vite
+my readme file
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# News Aggregator
 
-Currently, two official plugins are available:
+A personalized news aggregator web application built with React and Vite.  
+It fetches news articles based on selected categories or keyword search using the NewsAPI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Browse news by categories: General, Technology, Sports, Business  
+- Search for news articles by keyword  
+- Responsive and clean UI built with Bootstrap  
+- Loading spinner and error handling  
+- Infinite scroll to load more articles  
+- Dark mode toggle (if implemented)
+
+---
+
+## Demo
+
+[Live Demo Link](https://brilliant-dieffenbachia-ac2c47.netlify.app/)  
+
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher recommended)  
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/amkr6207/news-aggregator.git
+   cd news-aggregator
+
+2. Install dependencies:
+    npm install
+    # or
+    yarn
+
+3. Create a .env file in the root (optional, if you want to store API key securely):
+   VITE_NEWS_API_KEY=your_api_key_here
+
+4. Start the development server:
+   npm run dev
+    # or
+    yarn dev
+
+5. Open your browser and visit:
+   http://localhost:5173
+
+
+
+
+
+
+
+
+
