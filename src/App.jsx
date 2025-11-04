@@ -14,10 +14,10 @@ function App() {
   const [category, setCategory] = useState("general");
   const [keyword, setKeyword] = useState("");
   const [articles, setArticles] = useState([]); // Stores fetched articles list
-  const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1); // Tracks current page for pagination or infinite scroll.
+  const [totalResults, setTotalResults] = useState(0); // Stores total number of available articles from API.
+  const [loading, setLoading] = useState(false); // Indicates whether API is currently fetching data .
+  const [error, setError] = useState(null); // Stores any error message during API fetching.
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem("darkMode") === "true";
   });
