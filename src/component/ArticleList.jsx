@@ -3,18 +3,19 @@ import ArticleCard from "./ArticleCard";
 
 // ArticleList component to render a list of articles or a friendly empty message
 function ArticleList({ articles }) {
+
   return (
-    <div className="row gy-4">
+    <div className="grid grid-cols-1 grid-cols-2 grid-cols-3">
       {/* If no articles, show user-friendly message */}
       {articles.length === 0 ? (
-        <div className="text-center my-5">
+        <div className="text-center mt-xl" style={{ gridColumn: '1 / -1' }}>
           {/* Inline SVG icon for inbox */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="64"
             height="64"
             fill="currentColor"
-            className="bi bi-inbox mb-3 text-muted"
+            className="mb-lg text-muted"
             viewBox="0 0 16 16"
             aria-hidden="true" // Hide from screen readers (decorative)
           >
