@@ -7,9 +7,6 @@ It fetches news articles based on selected categories or keyword search using th
 
 ## Features
 
-## Features
-
-- **Premium UI**: Modern, glassmorphism-inspired design with smooth animations and a vibrant color palette.
 - **Country Selection**: Read news from **India**, USA, UK, Australia, and Canada.
 - **Smart Search**: Filter by category or search by keyword with a large, user-friendly search bar.
 - **Clear Filters**: Easily reset your search and country selection with a single click.
