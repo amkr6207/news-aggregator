@@ -27,65 +27,75 @@ function App() {
   const canLoadMore = articles.length < totalResults && page < MAX_PAGE;
 
   // Fetch news from API with pagination and append options
-  const fetchNews = useCallback(async (pageToFetch = 1, append = false) => {
-    setLoading(true);
-    setError(null);
+  const fetchNews = useCallback(
+    async (pageToFetch = 1, append = false) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      let url = "";
+      try {
+        let url = "";
 
-      // Map countries to popular news domains for that country
-      const countryDomains = {
-        'in': 'timesofindia.indiatimes.com,hindustantimes.com,indianexpress.com',
-        'us': 'cnn.com,nytimes.com,washingtonpost.com,foxnews.com',
-        'gb': 'bbc.co.uk,bbc.com,theguardian.com,independent.co.uk,telegraph.co.uk,dailymail.co.uk,mirror.co.uk,express.co.uk,metro.co.uk,standard.co.uk',
-        'au': 'abc.net.au,news.com.au,smh.com.au',
-        'ca': 'cbc.ca,theglobeandmail.com,nationalpost.com'
-      };
+        // Map countries to popular news domains for that country
+        const countryDomains = {
+          in: "timesofindia.indiatimes.com,hindustantimes.com,indianexpress.com",
+          us: "cnn.com,nytimes.com,washingtonpost.com,foxnews.com",
+          gb: "bbc.co.uk,bbc.com,theguardian.com,independent.co.uk,telegraph.co.uk,dailymail.co.uk,mirror.co.uk,express.co.uk,metro.co.uk,standard.co.uk",
+          au: "abc.net.au,news.com.au,smh.com.au",
+          ca: "cbc.ca,theglobeandmail.com,nationalpost.com",
+        };
 
-      if (keyword.trim() !== "") {
-        // When searching by keyword, use everything endpoint
-        url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(
-          keyword
-        )}&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${pageToFetch}&sortBy=publishedAt`;
-      } else {
-        // Use everything endpoint with domains for country-specific news
-        const domains = countryDomains[country] || countryDomains['us'];
-
-        // For category filtering, use it as a search term (but make it optional for 'general')
-        if (category !== 'general') {
-          url = `https://newsapi.org/v2/everything?domains=${domains}&q=${category}&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${pageToFetch}&sortBy=publishedAt`;
+        if (keyword.trim() !== "") {
+          // When searching by keyword, use everything endpoint
+          url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(
+            keyword
+          )}&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${pageToFetch}&sortBy=publishedAt`;
         } else {
-          // For general, just get all news from the domains
-          url = `https://newsapi.org/v2/everything?domains=${domains}&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${pageToFetch}&sortBy=publishedAt`;
+          // Use everything endpoint with domains for country-specific news
+          const domains = countryDomains[country] || countryDomains["us"];
+
+          // For category filtering, use it as a search term (but make it optional for 'general')
+          if (category !== "general") {
+            url = `https://newsapi.org/v2/everything?domains=${domains}&q=${category}&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${pageToFetch}&sortBy=publishedAt`;
+          } else {
+            // For general, just get all news from the domains
+            url = `https://newsapi.org/v2/everything?domains=${domains}&language=en&apiKey=${API_KEY}&pageSize=${PAGE_SIZE}&page=${pageToFetch}&sortBy=publishedAt`;
+          }
         }
+
+        console.log(
+          "Fetching news from:",
+          url.replace(API_KEY, "API_KEY_HIDDEN")
+        );
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        console.log("API Response:", {
+          status: data.status,
+          totalResults: data.totalResults,
+          articlesCount: data.articles?.length,
+        });
+
+        if (data.status !== "ok") {
+          throw new Error(data.message || "Failed to fetch news");
+        }
+
+        setTotalResults(data.totalResults || 0);
+
+        if (append) {
+          setArticles((prev) => [...prev, ...data.articles]);
+        } else {
+          setArticles(data.articles || []);
+        }
+      } catch (err) {
+        console.error("Error fetching news:", err);
+        setError(err.message);
       }
 
-      console.log('Fetching news from:', url.replace(API_KEY, 'API_KEY_HIDDEN'));
-
-      const response = await fetch(url);
-      const data = await response.json();
-
-      console.log('API Response:', { status: data.status, totalResults: data.totalResults, articlesCount: data.articles?.length });
-
-      if (data.status !== "ok") {
-        throw new Error(data.message || "Failed to fetch news");
-      }
-
-      setTotalResults(data.totalResults || 0);
-
-      if (append) {
-        setArticles((prev) => [...prev, ...data.articles]);
-      } else {
-        setArticles(data.articles || []);
-      }
-    } catch (err) {
-      console.error('Error fetching news:', err);
-      setError(err.message);
-    }
-
-    setLoading(false);
-  }, [keyword, country, category]);
+      setLoading(false);
+    },
+    [keyword, country, category]
+  );
 
   // Load more articles by incrementing page and fetching more
   const handleLoadMore = useCallback(() => {
@@ -100,7 +110,7 @@ function App() {
   const handleScroll = useCallback(() => {
     if (
       window.innerHeight + window.scrollY >=
-      document.documentElement.scrollHeight - 100 &&
+        document.documentElement.scrollHeight - 100 &&
       !loading &&
       canLoadMore
     ) {
@@ -182,7 +192,7 @@ function App() {
 
         {/* Error message */}
         {error && (
-          <p className="text-center" style={{ color: 'var(--color-accent)' }}>
+          <p className="text-center" style={{ color: "var(--color-accent)" }}>
             Error: {error}
           </p>
         )}
@@ -192,9 +202,7 @@ function App() {
 
         {/* Inform user when no more results available */}
         {!canLoadMore && articles.length > 0 && !loading && (
-          <p className="text-center mt-xl">
-            No more articles available.
-          </p>
+          <p className="text-center mt-xl">No more articles available.</p>
         )}
       </div>
     </>
@@ -202,4 +210,3 @@ function App() {
 }
 
 export default App;
-
