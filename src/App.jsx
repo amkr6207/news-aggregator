@@ -6,7 +6,7 @@ const API_KEY = import.meta.env.VITE_NEWS_API_KEY; // Your NewsAPI key
 const categories = ["general", "technology", "sports", "business"];
 const PAGE_SIZE = 10; // Number of articles per page
 
-const MAX_RESULTS = 100; // NewsAPI free tier max results
+const MAX_RESULTS = 100; // Max articles NewsAPI allows in ONE API response ( We can do 100 API request per day )
 const MAX_PAGE = Math.ceil(MAX_RESULTS / PAGE_SIZE); // Max page number allowed
 
 function App() {
